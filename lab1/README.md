@@ -20,10 +20,10 @@ We used Ruby, don't know why, just thought it will be nice to try something new.
 ### How to run?
 1. Install Docker
 2. Run this commands in command line:
-  - docker pull alexburlacu/pr-server
-  - docker run -p 5000:5000 --rm alexburlacu/pr-server
-3. start server in another cmd window: ruby server.rb
-4. start client in another cmd window: telnet 0.0.0.0 2000
+  - **docker pull alexburlacu/pr-server**
+  - **docker run -p 5000:5000 --rm alexburlacu/pr-server**
+3. Start server in another cmd window: **ruby server.rb**
+4. Start client in another cmd window: **telnet 0.0.0.0 2000**
 
 ### Conclusion
 The laboratory forced you to learn what you have never learn through theory
