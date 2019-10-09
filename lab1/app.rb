@@ -1,5 +1,5 @@
 # file: app.rb
-require "./readRoutes.rb"
+require "./routes.rb"
 
 class Application
   def main
