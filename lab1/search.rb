@@ -1,49 +1,58 @@
 require "./app.rb"
-require "JSON"
+require "json"
 
 class Search
-  def selectColumn(data, columnName)
-    array = []
+  @@array = []
 
+  def select_column(data, columnName)
     data = JSON.parse(data)
     if data.is_a?(Array)
       data.each do |json|
         unless json[columnName].nil?
-          array.push(json[columnName])
+          @@array.push(json[columnName])
         end
       end
     else
-      unless data[columnName].nil?
-        array.push(data[columnName])
-      end
+      push_if_not_null(data, columnName)
     end
-    unless array.empty?
-      return array
-    end
+    return not_empty_array
   end
 
-  def selectFromColumn(data, columnName, pattern)
-    array = []
+  def select_from_column(data, columnName, pattern)
+    reg = Regexp.new(pattern)
 
     data = JSON.parse(data)
-
-    reg = Regexp.new(pattern)
     if data.is_a?(Array)
       data.each do |json|
         unless json[columnName].nil?
           value = json[columnName]
           if value.match(reg)
-            array.push(value)
+            @@array.push(value)
           end
         end
       end
     else
-      unless data[columnName].nil?
-        array.push(data[columnName])
-      end
+      push_if_not_null(data, columnName)
     end
-    unless array.empty?
-      return array
+    return not_empty_array
+  end
+
+  def is_array(data)
+  end
+
+  def not_empty_array
+    unless @@array.empty?
+      return @@array
     end
+  end
+
+  def push_if_not_null(data, columnName)
+    unless data[columnName].nil?
+      @@array.push(data[columnName])
+    end
+  end
+
+  def clear
+    @@array = []
   end
 end
