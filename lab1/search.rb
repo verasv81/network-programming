@@ -26,8 +26,15 @@ class Search
       data.each do |json|
         unless json[columnName].nil?
           value = json[columnName]
-          if value.match(reg)
-            @@array.push(value)
+          if value.is_a?(Integer)
+            value = value.to_s
+            if value.match(reg)
+              array.push(value)
+            end
+          else
+            if value.match(reg)
+              array.push(value)
+            end
           end
         end
       end
